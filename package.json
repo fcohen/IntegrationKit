@@ -1,0 +1,50 @@
+{
+    "name": "login-node-nodejs-app-1522924093328",
+    "description": "",
+    "version": "1.0.0",
+    "author": "zeptoh",
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/githubUser/login-node-nodejs-app-1522924093328.git"
+    },
+    "bugs": "http://github.com/githubUser/login-node-nodejs-app-1522924093328/issues",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
+    },
+    "dependencies": {
+        "@stomp/stompjs": "^4.0.2",
+        "bcrypt": "^1.0.2",
+        "connect-mongo": "^1.3.2",
+        "cors": "^2.8.1",
+        "express": "^4.15.2",
+        "express-session": "^1.15.2",
+        "mongoose": "^4.9.8",
+        "nodemon": "^1.11.0",
+        "sockjs": "^0.3.19",
+        "sockjs-client": "^1.1.4",
+        "swaggerize-express": "^4.0.0",
+        "swagmock": "~0.0.2",
+        "websocket": "^1.0.25",
+        "websocket-multiplex": "^0.1.0"
+    },
+    "devDependencies": {
+        "eslint": "^2",
+        "istanbul": "~0.4.3",
+        "is-my-json-valid": "^2.13.1",
+        "js-yaml": "^3.2.6",
+        "supertest": "^1.2.0",
+        "swagger-parser": "^3.4.1",
+        "tape": "^4"
+    },
+    "scripts": {
+        "start": "node server",
+        "watch": "nodemon server && mongod",
+        "lint": "eslint .",
+        "regenerate": "yo swaggerize:test --framework express --apiPath './config/swagger.json'"
+    },
+    "generator-swaggerize": {
+        "version": "3.1.0"
+    },
+    "main": "./server"
+}

@@ -1,0 +1,257 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "login"
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/LoginSuccessSchema"
+            },
+            "examples": {
+              "application/json": {
+                "type": "object",
+                "properties": {
+                  "message": "login successful",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "error response",
+            "schema": {
+              "$ref": "#/definitions/LoginErrorResponseSchema"
+            },
+            "examples": {
+              "application/json": {
+                "type": "object",
+                "properties": {
+                  "message": "login failed",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "doLogin",
+            "schema": {
+              "$ref": "#/definitions/DoLoginSchema"
+            }
+          }
+        ],
+        "operationId": "postLogin",
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/index": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "login created",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "parameters": [],
+        "operationId": "getIndex",
+        "description": "index page",
+        "summary": "index page"
+      }
+    },
+    "/register": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RegsiterSchema"
+            }
+          }
+        ],
+        "operationId": "postRegister",
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/profile": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "profile shown"
+          }
+        },
+        "parameters": [],
+        "operationId": "getProfile"
+      }
+    },
+    "/logout": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "loggedout successfully"
+          }
+        },
+        "parameters": [],
+        "operationId": "getLogout"
+      }
+    },
+    "/": {
+			"get": {
+				"operationId": "getHellopage",
+				"parameters": [],
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "<html><body><b>This is an html page</b></body></html>"
+					}
+				}
+			}
+		}
+  },
+  "definitions": {
+    "DoLoginSchema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "logemail": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "default": "logemail"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "string"
+                }
+              }
+            },
+            "logpassword": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "default": "logpassword"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "LoginErrorResponseSchema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "default": "login failed"
+            },
+            "type": {
+              "type": "string",
+              "default": "string"
+            }
+          }
+        }
+      }
+    },
+    "LoginSuccessSchema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "default": "login successful"
+            },
+            "type": {
+              "type": "string",
+              "default": "string"
+            }
+          }
+        }
+      }
+    },
+    "RegsiterSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "default": "example@zeptoh.com"
+        },
+        "username": {
+          "type": "string",
+          "default": "zeptoh"
+        },
+        "password": {
+          "type": "string",
+          "default": "password"
+        },
+        "passwordConf": {
+          "type": "string",
+          "default": "password"
+        }
+      }
+    }
+  }
+}

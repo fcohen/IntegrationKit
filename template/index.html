@@ -1,0 +1,95 @@
+<!doctype html>
+<html><head>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/sockjs.min.js"></script>
+    <script src="js/websocket-multiplex-0.1.js"></script>
+    <style>
+      .box {
+          width: 300px;
+          float: left;
+          margin: 0 20px 0 20px;
+      }
+      .box div, .box input {
+          border: 1px solid;
+          -moz-border-radius: 4px;
+          border-radius: 4px;
+          width: 100%;
+          padding: 0px;
+          margin: 5px;
+      }
+      .box div {
+          border-color: grey;
+          height: 300px;
+          overflow: auto;
+      }
+      .box input {
+          height: 30px;
+      }
+      h1 {
+          margin-left: 30px;
+      }
+      body {
+          background-color: #F0F0F0;
+          font-family: "Arial";
+      }
+    </style>
+</head><body lang="en">
+    <h1>SockJS Express example</h1>
+
+    <div id="first" class="box">
+      <div></div>
+      <form id="form1"><input autocomplete="off" value="Notification here..."></input></form>
+      <form id="form2"><input autocomplete="off" value="Betting here..."></input></form>
+    </div>
+
+    <script>
+		var loc = window.location.href;
+        var sockjs_url = loc+'multiplex';
+        var sockjs = new SockJS(sockjs_url);
+        var multiplexer = new WebSocketMultiplex(sockjs);
+        var notification  = multiplexer.channel('notification');
+        var betting  = multiplexer.channel('betting');
+        $('#form1 input').focus();
+        $('#form2 input').focus();
+
+        var div  = $('#first div');
+        var inp1  = $('#form1 input');
+        var inp2  = $('#form2 input');
+        var form1 = $('#form1');
+        var form2 = $('#form2');
+
+        var print = function(m, p) {
+            p = (p === undefined) ? '' : JSON.stringify(p);
+            div.append($("<code>").text(m + ' ' + p));
+            div.append($("<br>"));
+            div.scrollTop(div.scrollTop()+10000);
+        };
+
+        notification.onopen    = function()  {print('[*] open', notification.protocol);};
+        notification.onmessage = function(e) {print('[.] message', e.data);};
+        notification.onclose   = function()  {print('[*] close');};
+
+        betting.onopen    = function()  {print('[*] open', betting.protocol);};
+        betting.onmessage = function(e) {print('[.] message', e.data);};
+        betting.onclose   = function()  {print('[*] close');};
+
+       /* sockjs.onopen    = function()  {print('[*] open', sockjs.protocol);};
+        sockjs.onmessage = function(e) {print('[.] message', e.data);};
+        sockjs.onclose   = function()  {print('[*] close');};*/
+
+        form1.submit(function() {
+            print('[ ] sending', inp1.val());
+            notification.send(inp1.val());
+            inp1.val('');
+            return false;
+        });
+
+         form2.submit(function() {
+            print('[ ] sending', inp2.val());
+            betting.send(inp2.val());
+            inp2.val('');
+            return false;
+        });
+
+    </script>
+</body></html>
