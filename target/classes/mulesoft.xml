@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mule-ss="http://www.mulesoft.org/schema/mule/spring-security"
+	xmlns:ss="http://www.springframework.org/schema/security"
+	xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" 
+	xmlns:servlet="http://www.mulesoft.org/schema/mule/servlet" 
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" 
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" 
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" 
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/current/mule-spring-security.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/servlet http://www.mulesoft.org/schema/mule/servlet/current/mule-servlet.xsd
+http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration" host="baconipsum.com" port="80" basePath="api" doc:name="HTTP Request Configuration"/>
+    <apikit:config name="Router" raml="raml/mulesoft.raml" consoleEnabled="true" consolePath="console" keepRamlBaseUri="false" doc:name="Router">
+        <apikit:flow-mapping resource="/gamesType" action="get" content-type="application/json" flow-ref="mulesoftExternalAPIFlow"/>
+    </apikit:config>
+    
+    <spring:beans>
+		<spring:bean class="mulesoft.authenticator.CustomAuthenticationProvider" id="customAuthenticationProvider"/>
+	</spring:beans>
+	<spring:beans>
+		<ss:authentication-manager alias="authenticationManager">
+		<ss:authentication-provider ref="customAuthenticationProvider"/> 
+		  <!-- picking credentials from Java Class -->
+		</ss:authentication-manager>
+	</spring:beans>
+	<mule-ss:security-manager doc:name="Spring_Security_Provider" name="security">
+	<mule-ss:delegate-security-provider name="memory-provider" delegate-ref="authenticationManager" />
+	</mule-ss:security-manager>
+
+    <flow name="mulesoftStaticFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/static" doc:name="Static Resources"/>
+        <http:static-resource-handler resourceBase="${app.home}/webapps" defaultFile="index.html" doc:name="Static Resource Handler" metadata:id="184a36ee-1993-43c8-bf6e-17c31863bd77"/>
+    </flow>
+    <flow name="mulesoftExternalAPIFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/ext" doc:name="External API"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/" method="GET" doc:name="External API Configurations">
+            <http:request-builder>
+                <http:query-param paramName="type" value="#[message.inboundProperties.'http.query.params'.type]"/>
+                <http:query-param paramName="sentences" value="#[message.inboundProperties.'http.query.params'.sentences]"/>
+            </http:request-builder>
+        </http:request>
+    </flow>
+    <flow name="mulesoftControllers">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/pages/{pageName}" allowedMethods="GET" doc:name="HTTP Controllers">
+            <http:error-response-builder>
+                <http:header headerName="content-type" value="text/html"/>
+            </http:error-response-builder>
+        </http:listener>
+        <http:basic-security-filter realm="mule-realm"/>
+		<mule-ss:authorization-filter requiredAuthorities="USER"/>
+		<logger level="INFO" message="## passed security" doc:name="Logger"/>
+        <custom-processor name="Custom_Processor" class="mulesoft.UserController" doc:name="ControllerProccessors" metadata:id="dcde7d9a-0e5d-42e1-824a-c64c3c56cbef"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+    </flow>
+    <flow name="mulesoftInternalAPIFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="Router" doc:name="APIkit Router"/>
+    </flow>
+    <flow name="get:/gamesType:Router">
+        <custom-processor name="API_Processor" doc:name="ControllerProccessors" metadata:id="dcde7d9a-0e5d-42e1-824a-c64c3c56cbef" class="mulesoft.api.RestController"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+    </flow>
+</mule>
