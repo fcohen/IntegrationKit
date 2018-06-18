@@ -1,0 +1,111 @@
+Too many tools
+
+ACCELERATED DEVELOPMENT AND MANAGEMENT
+Red Hat JBoss Data Grid
+Red Hat JBoss Enterprise Application Platform
+Red Hat JBoss Web Server
+
+DEVELOPER TOOLS
+Red Hat Application Migration Toolkit
+Red Hat Development Suite
+Red Hat JBoss Developer Studio
+
+INTEGRATION AND AUTOMATION
+Red Hat JBoss AMQ
+Red Hat JBoss BRMS
+Red Hat JBoss BPM Suite
+Red Hat JBoss Data Virtualization
+Red Hat JBoss Fuse
+
+MOBILE
+Red Hat Mobile Application Platform
+
+CLOUD
+Red Hat OpenShift Container Platform
+
+LANGUAGES AND COMPILERS
+OpenJDK
+
+-------------------------------------
+
+Install JBOSS Developer Studio
+Install JBoss EAP
+
+https://developers.redhat.com/quickstarts/eap/helloworld/
+https://developers.redhat.com/products/eap/hello-world/
+Configure Maven Repositories
+
+From Redhat central page, Select "helloworld-rs/"
+Click Finish. This downloads the helloworld application and its Maven dependencies.
+
+Once all the dependencies are downloaded, a dialog appears to tell you that your project is ready. Click Finish.
+- Daialog appeared long time after clicking finish.
+
+JBoss Admin console - Address already in use: 9990
+The process known as NVIDIA Network Service belongs to software NVIDIA Network Service or NVIDIA Drivers or NVIDIA Display Control Panel by NVIDIA (www.nvidia.com).
+
+https://stackoverflow.com/questions/25772222/change-port-number-in-jboss-eap-6-0-1
+Changed the port to 9980, Server is started.
+
+http://localhost:8080/jboss-helloworld-rs/
+
+Create new basic Java EE web project.
+Takes Longer time to create the basic Java EE project as it downloads lot of maven dependencies
+
+Template Engine
+    FreeMarker
+    Apache Velocity
+        
+http://www.vogella.com/tutorials/FreeMarker/article.html
+Installed freemaker ide in eclipse
+
+http://lvtutorial.com/spring-mvc/tutorial-step-by-step-helloworld-with-spring-mvc-part-1.html
+
+Maven configuration error
+
+-Delete dependencies & update Maven project
+
+WFLYSRV0161: Failed to get manifest for deployment
+
+-Delete dependencies & update Maven project
+
+Description	Resource	Path	Location	Type
+Cannot change version of project facet Dynamic Web Module to 2.5.	RedhatJboss		line 1	Maven Java EE Configuration Problem
+
+-<configuration>
+                    <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <source>1.8</source> <!-- yours Java version -->
+                	<target>1.8</target>
+                </configuration>
+
+Failed to define class org.springframework.http.server.reactive.AbstractListenerReadPublisher                
+Error while loading class org.springframework.http.server.reactive.ServletHttpHandlerAdapter$HandlerResultAsyncListener
+
+java.lang.NoSuchMethodError: org.springframework.util.ReflectionUtils.doWithLocalFields
+
+403 forbidden error
+
+http://www.mastertheboss.com/javaee/mongodb/3-ways-you-can-connect-to-mongodb-from-wildfly-jboss-eap
+
+https://www.journaldev.com/7655/spring-orm-example-jpa-hibernate-transaction
+   
+https://access.redhat.com/solutions/290253
+
+WFLYUT0048: Failed to process WEB-INF/lib: "/C:/Users/Venkatesan/EAP-7.1.0/standalone/deployments/redhat-jboss.war/WEB-INF/lib/jandex-2.0.3.Final.jar"
+java.util.zip.ZipException: invalid END header (bad central directory offset)
+
+java.lang.NoSuchMethodError: org.hibernate.boot.model.source.spi.AttributePath.isPartOfCollectionElement
+
+https://www.developer.com/java/data/how-to-manage-data-persistence-with-mongodb-and-jpa.html
+
+https://theholyjava.wordpress.com/2012/06/21/creating-custom-login-modules-in-jboss-as-7-and-earlier/
+https://github.com/jakubholynet/blog/tree/master/miniprojects/jboss-custom-login
+   
+https://docs.jboss.org/jbosssecurity/docs/6.0/security_guide/html/Login_Modules.html
+
+https://www.mkyong.com/webservices/jax-rs/resteasy-hello-world-example/
+
+https://stackoverflow.com/questions/8147454/how-to-instantiate-a-class-while-jboss-startup    
+
+http://www.mastertheboss.com/jboss-frameworks/jboss-quartz/quartz-2-tutorial-on-jboss-as-7

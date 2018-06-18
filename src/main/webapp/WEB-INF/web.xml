@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name>hello_world</display-name>
+  
+  <servlet>
+        <servlet-name>redhat-jboss</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/servlet-context.xml</param-value>
+	</init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value></param-value>
+    </context-param>
+    <!-- Auto scan REST service -->
+    <context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<!-- this need same with resteasy servlet url-pattern -->
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/rest</param-value>
+	</context-param>
+	<listener>
+		<listener-class>
+			org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+		</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>resteasy-servlet</servlet-name>
+		<servlet-class>
+			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>resteasy-servlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+		
+    <servlet-mapping>
+        <servlet-name>redhat-jboss</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>     
+	
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
+   
+   <!-- Define a Security Constraint on this Application -->
+   <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>error</web-resource-name>
+        <url-pattern>/error</url-pattern>
+    </web-resource-collection>
+    <!-- OMIT auth-constraint -->
+	</security-constraint>
+	<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>registration</web-resource-name>
+        <url-pattern>/registration</url-pattern>
+    </web-resource-collection>
+    <!-- OMIT auth-constraint -->
+	</security-constraint>
+	 <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>StaticPages</web-resource-name>
+        <url-pattern>/static/*</url-pattern>
+    </web-resource-collection>
+    <!-- OMIT auth-constraint -->
+	</security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>BettingApplication</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+       <role-name>USER</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <!-- Define the Login Configuration for this Application -->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>BettingApplication</realm-name>
+    <form-login-config>
+       <form-login-page>/login</form-login-page>
+       <form-error-page>/error</form-error-page>
+    </form-login-config>
+  </login-config>
+
+  <!-- Security roles referenced by this web application -->
+  <security-role>
+    <description>
+      The role a user needs to be allowed to log in to the application
+    </description>
+    <role-name>USER</role-name>
+  </security-role>
+</web-app>
