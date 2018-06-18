@@ -1,0 +1,284 @@
+body{
+    background: #f7f7f7;
+    color: #414141;
+    cursor: auto;
+    font-family: Roboto,Arial,Helvetica,sans-serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.444;
+    margin: 0;
+    padding: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* custom css for materialize starts */
+/* Global style for grid start*/
+.s5ths,
+.m5ths,
+.l5ths,
+.xl5ths {
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+.row .col.s5ths {
+  width: 20%;
+}
+
+@media only screen and (min-width: 601px) {
+  .row .col.m5ths {
+    width: 20%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .row .col.l5ths {
+    width: 20%;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .row .col.xl5ths {
+    width: 20%;
+  }
+}
+/* Global style for grid  end*/
+
+input:not([type])+label:after, input[type=text]:not(.browser-default)+label:after, input[type=password]:not(.browser-default)+label:after, input[type=email]:not(.browser-default)+label:after, input[type=url]:not(.browser-default)+label:after, input[type=time]:not(.browser-default)+label:after, input[type=date]:not(.browser-default)+label:after, input[type=datetime]:not(.browser-default)+label:after, input[type=datetime-local]:not(.browser-default)+label:after, input[type=tel]:not(.browser-default)+label:after, input[type=number]:not(.browser-default)+label:after, input[type=search]:not(.browser-default)+label:after, textarea.materialize-textarea+label:after, .select-wrapper+label:after{
+    margin-top: 5px;
+}
+.tabs .tab a{
+    color: #848282;
+    font-weight: 500;
+}
+.tabs .tab a:hover, .tabs .tab a.active{
+    color: #0099ff;
+}
+.customRow{
+    margin-bottom: 0;
+}
+.tabs .indicator{
+    background-color: #0099ff;
+}
+
+/* custom css for materialize ends */
+
+/* home page start*/
+
+.fontStyle-bold{
+    font-weight: 500;
+    font-size: 16px;
+}
+.fontStyle1{
+    font-size: 12px;
+}
+.userInfo{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+}
+.brandLogo{
+    display: flex;
+    align-items: center;
+}
+.brandLogo img{
+    height: 35px;
+    width: auto;
+}
+.userName{
+    text-transform: uppercase;
+}
+.userCash{
+    color: #0099ff;
+    font-weight: 500;
+    font-size: 16px;
+}
+.matchTabs-wrap{
+    background-color: #fff;
+}
+.matchList-wrap{
+    margin-bottom: 30px;
+}
+.matchRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #fff;
+}
+.betTitle{
+    margin-bottom: 5px;
+}
+.betAmount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border-radius: 100%;
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+.betAmount:hover{
+    background-color: #0099ff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.menuWrap{
+    position: fixed;
+    bottom: 0;
+    width: inherit;
+    background-color: #fff;
+    z-index: 1000;
+    -webkit-box-shadow:  0 -1px 9px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -1px 9px 0px rgba(0, 0, 0, 0.4);
+}
+.menuWrap  .menuIcon{
+    display: block;
+    color: inherit;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+.unreadMsg-count{
+    position: relative;
+}
+.unreadMsg-count::after{
+    content: attr(data-unreadMsg-count);
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    background-color: #0099ff;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    line-height: 22px;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* home page end*/
+
+/* message page start*/
+.messageRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #fff;
+}
+.messageTitle{
+    background: #fff;
+    padding: 10px;
+}
+.messageTitle h5{
+    margin: 0;
+}
+.messageList-Wrap{
+    margin-bottom: 65px;
+}
+.messageRow.unreadMsg{
+    background-color: #d9ebf7;
+}
+.msgIcon{
+    width: 32px;
+    height: 32px;
+}
+.msgTitle{
+    font-weight: 500;
+}
+.msgCnt{
+    line-height: normal;
+    font-weight: normal;
+}
+.msgTime{
+    font-size: 12px;
+    color: #848282;
+    margin-top: 3px;
+}
+
+
+/* message page end*/
+
+/* Profile page */
+.profilePage{
+    background-color: #fff;
+}
+.profilePage .brandlogo-cnt{
+    margin-bottom: 10px;
+}
+.profilePage .brandLogo{
+    justify-content: center;
+    margin-top: 25px;
+}
+.titleText{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.signup-form > .row{
+    margin-bottom: 10px;
+}
+.signupBtn{
+    color: #0099ff;
+    font-weight: 500;
+    margin: 25px 0;
+}
+.signinBtn{
+    color: #0099ff;
+    font-weight: 500;
+    margin: 10px 0;
+}
+.profilePage .menuWrap{
+	display: none;
+}
+/* Profile page end */
+
+/* Redeem Page */
+
+.redeemPage{
+    background-color: #fff;
+}
+.redeemPage .brandLogo{
+    justify-content: center;
+    margin-top: 25px;
+}
+.redeemAmount{
+    font-size: 26px;
+    font-weight: 500;
+    color: #0099ff;
+}
+
+/* Redeem Page end */
+
+
+/* share page  */
+.sharePage{
+    background-color: #fff;
+}
+.sharePage .brandLogo{
+    justify-content: center;
+    margin-top: 25px;
+}
+
+
+/* share page end */
+
+/* media */
+@media only screen and (max-width: 601px){
+    body.container{
+        width: 100%;
+        padding: 0 .75rem;
+    }
+}
+
+.error-field label {
+	color: #FF0000;
+}
