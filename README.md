@@ -5,6 +5,12 @@ Would it surprise you that choosing TIBCO is 12% more efficient at developer pro
 
 For the past 8 years noted development expert Frank Cohen, founder at Appvance, updated and published the PushToTest Integration Knowledge Kit. The Kit is a free open-source competitive evaluation guide comparing TIBCO, Redhat Jboss, Spring Boot, Mulesoft, and many others.
 
+This Github repository has 4 branches, one for each platform:
+* Mulesoft
+* Redhat JBoss
+* Spring Boot
+* TIBCO Cloud Integration (TCI)
+
 The Kit helps you evaluate the developer productivity and performance of building services on integration platforms and deploying services to serverless, microservices, Cloud and AWS Lambda. The free Kit includes:
 
 * Executive Summary slide deck - 20 pages, describes project, methodology and results
